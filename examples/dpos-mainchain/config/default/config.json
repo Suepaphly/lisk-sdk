@@ -24,7 +24,7 @@
 		"modules": {}
 	},
 	"generation": {
-		"force": true,
+		"force": false,
 		"waitThreshold": 2,
 		"delegates": [],
 		"generators": [
