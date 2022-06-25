@@ -370,7 +370,9 @@ export class BlockHeader {
 			eventRoot: this.eventRoot,
 			transactionRoot: this.transactionRoot,
 			validatorsHash: this.validatorsHash,
-			aggregateCommit: this.aggregateCommit,
+			aggregateCommit: {
+				...this.aggregateCommit,
+			},
 			generatorAddress: this.generatorAddress,
 			maxHeightPrevoted: this.maxHeightPrevoted,
 			maxHeightGenerated: this.maxHeightGenerated,
