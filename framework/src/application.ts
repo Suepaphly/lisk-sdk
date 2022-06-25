@@ -280,12 +280,12 @@ export class Application {
 				stateDB: this._stateDB,
 				stateMachine: this._stateMachine,
 			});
-			const abiSocketPath = `ipc://${path.join(
+			const ipcPath = path.join(
 				systemDirs(this.config.label, this.config.rootPath).sockets,
 				'abi.ipc',
-			)}`;
-
-			this._abiServer = new ABIServer(this.logger, abiSocketPath, this._abiHandler);
+			);
+			this.logger.info({ path: ipcPath }, 'Starting ABI.');
+			this._abiServer = new ABIServer(this.logger, `ipc://${ipcPath}`, this._abiHandler);
 			this._abiHandler.event.on(EVENT_ENGINE_READY, () => {
 				this._controller
 					.start()
@@ -299,9 +299,11 @@ export class Application {
 					});
 			});
 			await this._abiServer.start();
-			const program = path.resolve(__dirname, 'engine_igniter');
-			const parameters = [abiSocketPath, 'false'];
-			this._engineProcess = childProcess.fork(program, parameters);
+			const program = path.resolve(__dirname, '../bin/lapidary');
+			const parameters = ['start', '-s', ipcPath];
+			this._engineProcess = childProcess.spawn(program, parameters, {
+				stdio: ['inherit', process.stdout, process.stderr],
+			});
 			this._engineProcess.on('exit', (code, signal) => {
 				// If child process exited with error
 				if (code !== null && code !== undefined && code !== 0) {
@@ -322,7 +324,7 @@ export class Application {
 
 		try {
 			this.channel.publish(APP_EVENT_SHUTDOWN);
-			this._engineProcess.kill(0);
+			this._engineProcess.kill('SIGTERM');
 			await this._controller.stop(errorCode, message);
 			this._stateDB.close();
 			this._moduleDB.close();
