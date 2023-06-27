@@ -1,0 +1,177 @@
+[
+	{
+		"index": 0,
+		"name": "newModule_newCommand",
+		"publicKey": "294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1",
+		"privateKey": "f1b5c9ae7d7f1c2e9ff7c588e0d2483f87b84261b0182a2253e1ce56ac1e71ed294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1",
+		"chainID": "04000000",
+		"data": {
+			"module": "newModule",
+			"command": "newCommand",
+			"params": "0a14abfa44825c2f3d6b0cdb070767a9911e1f0b073e10eee6a2c9eef8b894910118c0e0efe808",
+			"nonce": "16446950862619064590",
+			"fee": "9743363023438665922",
+			"senderPublicKey": "294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1",
+			"signatures": [
+				"e3c700d49db461f148e6b6633693aea66f1643350ab02e100ee8aa97837cd6793fc269a442f6195b37a59c13629017ebb3a1c9ff241d672a49a258ca04843600"
+			],
+			"id": "81ea36ab0b4e05d5aa6ecd0a313f7e4a70de5e3dd45b172ad1180c196089ec5b"
+		},
+		"blob": "0a096e65774d6f64756c65120a6e6577436f6d6d616e64188ef2dae5b7d5d39fe40120c2b1f3cdc1a1d89b87012a20294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed132270a14abfa44825c2f3d6b0cdb070767a9911e1f0b073e10eee6a2c9eef8b894910118c0e0efe808",
+		"output": [
+			"0 | Module : newModule",
+			"1 | Command : newCommand",
+			"2 | Fee : 97433630234.38665922",
+			"3 | Params Hash: ab09f1d797a26dd5cc172f1f6c0b287c401a00df51a67418545c0f8f95be8ac5"
+		],
+		"output_expert": [
+			"0 | Module : newModule",
+			"1 | Command : newCommand",
+			"2 | Fee : 97433630234.38665922",
+			"3 | Nonce : 16446950862619064590",
+			"4 | Params Hash: ab09f1d797a26dd5cc172f1f6c0b287c401a00df51a67418545c0f8f95be8ac5",
+			"5 | Params: 0a14abfa44825c2f3d6b0cdb070767a9911e1f0b073e10eee6a2c9eef8b894910118c0e0efe808"
+		],
+		"signature": "e3c700d49db461f148e6b6633693aea66f1643350ab02e100ee8aa97837cd6793fc269a442f6195b37a59c13629017ebb3a1c9ff241d672a49a258ca04843600"
+	},
+	{
+		"index": 1,
+		"name": "newModule_newCommand",
+		"publicKey": "3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+		"privateKey": "29620b5def93e3895a291da9afb366e620883e2a2582fc794dfa190924e5ba1b3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+		"chainID": "04000000",
+		"data": {
+			"module": "newModule",
+			"command": "newCommand",
+			"params": "0a140f4d3f4abf075672846172189d7676aa7d46490310c7f3eda9eadb88daa80118b8dcd5fc0c",
+			"nonce": "4433158131825520094",
+			"fee": "540424111280677533",
+			"senderPublicKey": "3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+			"signatures": [
+				"2f96cbc977381daf29d3dc2f8e41a1478c4d6eaff1d2401aa1a60ac7961ef88bc70211ce64e9c531c537179b7ab46909fd7dfd2bd23f1a9b10e97ef583a9a802"
+			],
+			"id": "e49b1dba7b3db5ddc6299b246055e9231694bb7fcdb3a0f4d6f6b25db10da1f9"
+		},
+		"blob": "0a096e65774d6f64756c65120a6e6577436f6d6d616e6418dedbe084d4baefc23d209dc5c3e7da9bfebf072a203455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a32270a140f4d3f4abf075672846172189d7676aa7d46490310c7f3eda9eadb88daa80118b8dcd5fc0c",
+		"output": [
+			"0 | Module : newModule",
+			"1 | Command : newCommand",
+			"2 | Fee : 5404241112.80677533",
+			"3 | Params Hash: 395f6386ad5848096c36b37178f2ea58e59740ff9890057e16d56e1066c1b4ae"
+		],
+		"output_expert": [
+			"0 | Module : newModule",
+			"1 | Command : newCommand",
+			"2 | Fee : 5404241112.80677533",
+			"3 | Nonce : 4433158131825520094",
+			"4 | Params Hash: 395f6386ad5848096c36b37178f2ea58e59740ff9890057e16d56e1066c1b4ae",
+			"5 | Params: 0a140f4d3f4abf075672846172189d7676aa7d46490310c7f3eda9eadb88daa80118b8dcd5fc0c"
+		],
+		"signature": "2f96cbc977381daf29d3dc2f8e41a1478c4d6eaff1d2401aa1a60ac7961ef88bc70211ce64e9c531c537179b7ab46909fd7dfd2bd23f1a9b10e97ef583a9a802"
+	},
+	{
+		"index": 2,
+		"name": "newModule_newCommand",
+		"publicKey": "3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f",
+		"privateKey": "7e5c5e3ac43d9a359286ae3d1c8f3695e929ef3c077c7f14ee0237ffa0f3ad683c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f",
+		"chainID": "04000000",
+		"data": {
+			"module": "newModule",
+			"command": "newCommand",
+			"params": "0a14ddeb150c5e3d894e419451189b66f3c53b356ebf10cac2dbabfc9b86b9c70118a7c48162",
+			"nonce": "8473534191313175569",
+			"fee": "17449894757117089528",
+			"senderPublicKey": "3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f",
+			"signatures": [
+				"469a743a719c940212811e848bdbcbb34de93ad43792e9de9dd014235e8c8fb896c552d0b2b56d10489cd999dafb7aa10de8425b8f0ecee0a0330f834c6ec200"
+			],
+			"id": "330a00050ea381d282ab530dff7e885594c2e9f88f7bfa728ff82334d3d79a06"
+		},
+		"blob": "0a096e65774d6f64756c65120a6e6577436f6d6d616e64189188e5cabcce82cc7520f8ada9efbfda9e95f2012a203c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f32260a14ddeb150c5e3d894e419451189b66f3c53b356ebf10cac2dbabfc9b86b9c70118a7c48162",
+		"output": [
+			"0 | Module : newModule",
+			"1 | Command : newCommand",
+			"2 | Fee : 174498947571.17089528",
+			"3 | Params Hash: 0fe3bbf5432fff8ee7d8d1aec0c9c7944c47ea6782391d4c6911ddbe4ffa87a9"
+		],
+		"output_expert": [
+			"0 | Module : newModule",
+			"1 | Command : newCommand",
+			"2 | Fee : 174498947571.17089528",
+			"3 | Nonce : 8473534191313175569",
+			"4 | Params Hash: 0fe3bbf5432fff8ee7d8d1aec0c9c7944c47ea6782391d4c6911ddbe4ffa87a9",
+			"5 | Params: 0a14ddeb150c5e3d894e419451189b66f3c53b356ebf10cac2dbabfc9b86b9c70118a7c48162"
+		],
+		"signature": "469a743a719c940212811e848bdbcbb34de93ad43792e9de9dd014235e8c8fb896c552d0b2b56d10489cd999dafb7aa10de8425b8f0ecee0a0330f834c6ec200"
+	},
+	{
+		"index": 3,
+		"name": "newModule_newCommand",
+		"publicKey": "b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d",
+		"privateKey": "fa352a221e5bc3888f4f3504fba5bcc5dad50ce35b3ec7f5bbe71dbd02cde27db6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d",
+		"chainID": "04000000",
+		"data": {
+			"module": "newModule",
+			"command": "newCommand",
+			"params": "0a14c568c6e635fc4b4bcdb8ff04744f41720584a15e10d082b0caf5b0e6f90e189ffbdbdf04",
+			"nonce": "13915940803222283034",
+			"fee": "4645948053429576579",
+			"senderPublicKey": "b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d",
+			"signatures": [
+				"6c2c38ac2ae1c14582605490d3d52c432594d1c3a01b6a21f6e1b1b3d01b8fa0d0d27e7f0d47a11c914b787dc51cd2fa3506f6df3ec0a055fa43461ffab85404"
+			],
+			"id": "5bee62ebaeb2c4de307b251cff2392f9f281ead37e0f9dd9fd21a9a2a3a2846e"
+		},
+		"blob": "0a096e65774d6f64756c65120a6e6577436f6d6d616e64189ac6b69be4cdd68fc1012083c7d9ccbaa4eebc402a20b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d32260a14c568c6e635fc4b4bcdb8ff04744f41720584a15e10d082b0caf5b0e6f90e189ffbdbdf04",
+		"output": [
+			"0 | Module : newModule",
+			"1 | Command : newCommand",
+			"2 | Fee : 46459480534.29576579",
+			"3 | Params Hash: a5093727a1ac7e7b50d40a549f1d1e75e98dfd755f882e18ad0b6dac95214130"
+		],
+		"output_expert": [
+			"0 | Module : newModule",
+			"1 | Command : newCommand",
+			"2 | Fee : 46459480534.29576579",
+			"3 | Nonce : 13915940803222283034",
+			"4 | Params Hash: a5093727a1ac7e7b50d40a549f1d1e75e98dfd755f882e18ad0b6dac95214130",
+			"5 | Params: 0a14c568c6e635fc4b4bcdb8ff04744f41720584a15e10d082b0caf5b0e6f90e189ffbdbdf04"
+		],
+		"signature": "6c2c38ac2ae1c14582605490d3d52c432594d1c3a01b6a21f6e1b1b3d01b8fa0d0d27e7f0d47a11c914b787dc51cd2fa3506f6df3ec0a055fa43461ffab85404"
+	},
+	{
+		"index": 4,
+		"name": "newModule_newCommand",
+		"publicKey": "dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0",
+		"privateKey": "945b4c7010ccf09379cc713a1ce35d61e0a66728fe62cf21f8a9732e1a658f11dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0",
+		"chainID": "04000000",
+		"data": {
+			"module": "newModule",
+			"command": "newCommand",
+			"params": "0a1444491a6cc14cc38664ce41a982f03dc74975f13d10f9cbd1a5c8afbcb37518bea0f6e304",
+			"nonce": "17716271606472299951",
+			"fee": "2557152425623626075",
+			"senderPublicKey": "dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0",
+			"signatures": [
+				"796a55213467115149b04f1a8e75d5ef4ace6f0bfaae9c05604ac708d5fa4ae4a574c1d57637e07d5f0452f0b0b8d6614dd99922c3732f687b350325e382f601"
+			],
+			"id": "283863a51dc94ab971971eddf572d70f96478dc1ef8ca26667eabfb303cc58f6"
+		},
+		"blob": "0a096e65774d6f64756c65120a6e6577436f6d6d616e6418afabfbc094e5b5eef50120dbc2cceed292b5be232a20dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c032260a1444491a6cc14cc38664ce41a982f03dc74975f13d10f9cbd1a5c8afbcb37518bea0f6e304",
+		"output": [
+			"0 | Module : newModule",
+			"1 | Command : newCommand",
+			"2 | Fee : 25571524256.23626075",
+			"3 | Params Hash: 88a733898a8287d02fba26e5166cd6d95bedecf03bf82b0397f34469f9f3f5fa"
+		],
+		"output_expert": [
+			"0 | Module : newModule",
+			"1 | Command : newCommand",
+			"2 | Fee : 25571524256.23626075",
+			"3 | Nonce : 17716271606472299951",
+			"4 | Params Hash: 88a733898a8287d02fba26e5166cd6d95bedecf03bf82b0397f34469f9f3f5fa",
+			"5 | Params: 0a1444491a6cc14cc38664ce41a982f03dc74975f13d10f9cbd1a5c8afbcb37518bea0f6e304"
+		],
+		"signature": "796a55213467115149b04f1a8e75d5ef4ace6f0bfaae9c05604ac708d5fa4ae4a574c1d57637e07d5f0452f0b0b8d6614dd99922c3732f687b350325e382f601"
+	}
+]

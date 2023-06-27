@@ -1,0 +1,192 @@
+[
+	{
+		"index": 0,
+		"name": "multi-signature registration message",
+		"publicKey": "294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1",
+		"privateKey": "f1b5c9ae7d7f1c2e9ff7c588e0d2483f87b84261b0182a2253e1ce56ac1e71ed294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1",
+		"tag": "LSK_RMSG_",
+		"chainID": "04000000",
+		"data": {
+			"numberOfSignatures": 3,
+			"mandatoryKeys": [
+				"294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1",
+				"3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a"
+			],
+			"optionalKeys": [
+				"3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f",
+				"b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d",
+				"dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+			],
+			"nonce": "20066",
+			"address": "lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp"
+		},
+		"blob": "0a145ed3570a1a15ece8f7ef47db0a409ea881077ce010e29c0118032220294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed122203455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a2a203c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f2a20b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d2a20dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0",
+		"output": [
+			"0 | Address: lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp",
+			"1 | Nonce: 20066",
+			"2 | Number of Signatures: 3",
+			"3 | Mandatory Keys: 294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1,3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+			"4 | Optional Keys: 3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f,b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d,dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+		],
+		"output_expert": [
+			"0 | Address: lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp",
+			"1 | Nonce: 20066",
+			"2 | Number of Signatures: 3",
+			"3 | Mandatory Keys: 294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1,3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+			"4 | Optional Keys: 3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f,b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d,dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+		],
+		"signature": "febd7d2b4c019458e2188eb2589595afda0bf4b1830bcfd6d21427f9c308127b953318b59a0964a690fd75140c25213e9aa08aa5cadaeedddbe6166a207ffc0f"
+	},
+	{
+		"index": 1,
+		"name": "multi-signature registration message",
+		"publicKey": "3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+		"privateKey": "29620b5def93e3895a291da9afb366e620883e2a2582fc794dfa190924e5ba1b3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+		"tag": "LSK_RMSG_",
+		"chainID": "04000000",
+		"data": {
+			"numberOfSignatures": 3,
+			"mandatoryKeys": [
+				"294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1",
+				"3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a"
+			],
+			"optionalKeys": [
+				"3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f",
+				"b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d",
+				"dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+			],
+			"nonce": "20066",
+			"address": "lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp"
+		},
+		"blob": "0a145ed3570a1a15ece8f7ef47db0a409ea881077ce010e29c0118032220294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed122203455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a2a203c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f2a20b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d2a20dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0",
+		"output": [
+			"0 | Address: lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp",
+			"1 | Nonce: 20066",
+			"2 | Number of Signatures: 3",
+			"3 | Mandatory Keys: 294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1,3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+			"4 | Optional Keys: 3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f,b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d,dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+		],
+		"output_expert": [
+			"0 | Address: lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp",
+			"1 | Nonce: 20066",
+			"2 | Number of Signatures: 3",
+			"3 | Mandatory Keys: 294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1,3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+			"4 | Optional Keys: 3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f,b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d,dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+		],
+		"signature": "113812129401e1368f0481edd6e0695ea449a9a5555ff6048f90d271bb345946e1bfdf7d0f09ea3b455a30cf4c5e193978d085c2862a897a83b34575a24a1f06"
+	},
+	{
+		"index": 2,
+		"name": "multi-signature registration message",
+		"publicKey": "3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f",
+		"privateKey": "7e5c5e3ac43d9a359286ae3d1c8f3695e929ef3c077c7f14ee0237ffa0f3ad683c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f",
+		"tag": "LSK_RMSG_",
+		"chainID": "04000000",
+		"data": {
+			"numberOfSignatures": 3,
+			"mandatoryKeys": [
+				"294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1",
+				"3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a"
+			],
+			"optionalKeys": [
+				"3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f",
+				"b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d",
+				"dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+			],
+			"nonce": "20066",
+			"address": "lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp"
+		},
+		"blob": "0a145ed3570a1a15ece8f7ef47db0a409ea881077ce010e29c0118032220294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed122203455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a2a203c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f2a20b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d2a20dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0",
+		"output": [
+			"0 | Address: lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp",
+			"1 | Nonce: 20066",
+			"2 | Number of Signatures: 3",
+			"3 | Mandatory Keys: 294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1,3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+			"4 | Optional Keys: 3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f,b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d,dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+		],
+		"output_expert": [
+			"0 | Address: lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp",
+			"1 | Nonce: 20066",
+			"2 | Number of Signatures: 3",
+			"3 | Mandatory Keys: 294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1,3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+			"4 | Optional Keys: 3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f,b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d,dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+		],
+		"signature": "e8615f409fb058171c74752bfae5b55759d4572baeee00fc6824c4a25f5bc9c826b7dfb9c6ab1a0812fdd41e90c4a6ceff011395d499ba6a68b8c67439815106"
+	},
+	{
+		"index": 3,
+		"name": "multi-signature registration message",
+		"publicKey": "b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d",
+		"privateKey": "fa352a221e5bc3888f4f3504fba5bcc5dad50ce35b3ec7f5bbe71dbd02cde27db6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d",
+		"tag": "LSK_RMSG_",
+		"chainID": "04000000",
+		"data": {
+			"numberOfSignatures": 3,
+			"mandatoryKeys": [
+				"294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1",
+				"3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a"
+			],
+			"optionalKeys": [
+				"3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f",
+				"b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d",
+				"dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+			],
+			"nonce": "20066",
+			"address": "lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp"
+		},
+		"blob": "0a145ed3570a1a15ece8f7ef47db0a409ea881077ce010e29c0118032220294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed122203455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a2a203c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f2a20b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d2a20dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0",
+		"output": [
+			"0 | Address: lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp",
+			"1 | Nonce: 20066",
+			"2 | Number of Signatures: 3",
+			"3 | Mandatory Keys: 294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1,3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+			"4 | Optional Keys: 3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f,b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d,dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+		],
+		"output_expert": [
+			"0 | Address: lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp",
+			"1 | Nonce: 20066",
+			"2 | Number of Signatures: 3",
+			"3 | Mandatory Keys: 294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1,3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+			"4 | Optional Keys: 3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f,b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d,dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+		],
+		"signature": "6304ea352b041255be8dee2634388a9258b23b4dc2ddb8cc1137d6f1b60014b974b494b37fafc7601b26ca193f00cd950a665648042a502793afd45ff346cf08"
+	},
+	{
+		"index": 4,
+		"name": "multi-signature registration message",
+		"publicKey": "dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0",
+		"privateKey": "945b4c7010ccf09379cc713a1ce35d61e0a66728fe62cf21f8a9732e1a658f11dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0",
+		"tag": "LSK_RMSG_",
+		"chainID": "04000000",
+		"data": {
+			"numberOfSignatures": 3,
+			"mandatoryKeys": [
+				"294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1",
+				"3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a"
+			],
+			"optionalKeys": [
+				"3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f",
+				"b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d",
+				"dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+			],
+			"nonce": "20066",
+			"address": "lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp"
+		},
+		"blob": "0a145ed3570a1a15ece8f7ef47db0a409ea881077ce010e29c0118032220294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed122203455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a2a203c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f2a20b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d2a20dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0",
+		"output": [
+			"0 | Address: lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp",
+			"1 | Nonce: 20066",
+			"2 | Number of Signatures: 3",
+			"3 | Mandatory Keys: 294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1,3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+			"4 | Optional Keys: 3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f,b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d,dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+		],
+		"output_expert": [
+			"0 | Address: lsk5s4q7vudvwe7yhg83g9ukupfqvzu7gnz5wsgzp",
+			"1 | Nonce: 20066",
+			"2 | Number of Signatures: 3",
+			"3 | Mandatory Keys: 294bc8394b24f3a501b02082e1387048b78a6486a5d24d2d2efa601ba5d0eed1,3455faa24a240bcf88cc18af06099ac7a724efe4cdc671e7cf36518b0271ea3a",
+			"4 | Optional Keys: 3c0851bf599a70ea33d5224cb4d0c3c91d6f0d7db54fde00b8821f2eec980e8f,b6dd84fc7529899b5cb830bf88f7da804609c78182304c8b42a2c77791e9bc7d,dfa6e012044f72bca26686ba58b8fa8fb4e9d7b8c06c067a521ec026fe4c06c0"
+		],
+		"signature": "27b5a98e87e81206a9f542f257e630113575491308bd98bfc4020021ced45636279e072eef0fef4c2f1f3c7717b649a64a27097b185d8f83833a9aa944fefe03"
+	}
+]
