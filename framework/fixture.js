@@ -4,6 +4,7 @@ const { codec } = require('@liskhq/lisk-codec');
 const { ed, address, utils } = require('@liskhq/lisk-cryptography');
 const { convertBeddowsToLSK } = require('@liskhq/lisk-transactions');
 const { Transaction } = require('@liskhq/lisk-chain');
+const { Mnemonic } = require('@liskhq/lisk-passphrase');
 const fs = require('fs');
 
 const { multisigRegMsgSchema } = require('./dist-node');
@@ -19,10 +20,11 @@ const randomUInt64 = () => utils.getRandomBytes(8).readBigUInt64BE();
 multisigRegMsgSchema.properties.address.format = 'lisk32';
 
 async function createActors(num = 5) {
+	const passphrase = Mnemonic.generateMnemonic();
 	const secretKeys = await Promise.all(
 		new Array(num)
 			.fill(0)
-			.map(async (_, i) => ed.getPrivateKeyFromPhraseAndPath('test test test', `m/44'/134'/${i}`)),
+			.map(async (_, i) => ed.getPrivateKeyFromPhraseAndPath(passphrase, `m/44'/134'/${i}'`)),
 	);
 	const actors = secretKeys.map(sk => ({
 		privateKey: sk,
@@ -33,12 +35,17 @@ async function createActors(num = 5) {
 }
 
 async function createRegisterMultisigMessageFixtures(rootActor) {
-	const actors = await createActors();
+	const mandatoryActors = await createActors(2);
+	mandatoryActors.sort((a1, a2) => a1.publicKey.compare(a2.publicKey));
+	const optionalActors = await createActors(3);
+	optionalActors.sort((a1, a2) => a1.publicKey.compare(a2.publicKey));
+
+	const actors = [...mandatoryActors, ...optionalActors];
 
 	const registrationData = {
 		numberOfSignatures: 3,
-		mandatoryKeys: [actors[0].publicKey, actors[1].publicKey],
-		optionalKeys: [actors[2].publicKey, actors[3].publicKey, actors[4].publicKey],
+		mandatoryKeys: mandatoryActors.map(a => a.publicKey),
+		optionalKeys: optionalActors.map(a => a.publicKey),
 	};
 
 	const nonce = BigInt(Math.floor(Math.random() * 100000));
