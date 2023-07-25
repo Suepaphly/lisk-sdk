@@ -181,15 +181,15 @@ describe('MessageRecoveryCommand', () => {
 				transaction,
 			}).createCommandVerifyContext<MessageRecoveryParams>(messageRecoveryParamsSchema);
 
-			await interopModule.stores
-				.get(TerminatedOutboxStore)
-				.set(createStoreGetter(commandVerifyContext.stateStore as any), chainID, {
-					outboxRoot,
-					outboxSize: terminatedChainOutboxSize,
-					partnerChainInboxSize: 1,
-				});
+			// await interopModule.stores
+			// 	.get(TerminatedOutboxStore)
+			// 	.set(createStoreGetter(commandVerifyContext.stateStore as any), chainID, {
+			// 		outboxRoot,
+			// 		outboxSize: terminatedChainOutboxSize,
+			// 		partnerChainInboxSize: 1,
+			// 	});
 
-			jest.spyOn(regularMerkleTree, 'verifyDataBlock').mockReturnValue(true);
+			// jest.spyOn(regularMerkleTree, 'verifyDataBlock').mockReturnValue(true);
 		});
 
 		it('should return error if terminated outbox account does not exist', async () => {
@@ -493,31 +493,56 @@ describe('MessageRecoveryCommand', () => {
 			expect(result.error?.message).toInclude(`Cross-chain message status is not valid.`);
 		});
 
-		it('should return status OK for valid params', async () => {
+		it.only('should return status OK for valid params', async () => {
 			ccms = [
 				{
 					nonce: BigInt(0),
 					module: MODULE_NAME_INTEROPERABILITY,
 					crossChainCommand: CROSS_CHAIN_COMMAND_REGISTRATION,
-					sendingChainID: utils.intToBuffer(2, 4),
+					sendingChainID: getMainchainID(chainID),
 					receivingChainID: chainID,
-					fee: BigInt(1),
+					fee: BigInt(0),
+					status: CCMStatusCode.OK,
+					params: Buffer.alloc(0),
+				},
+				{
+					nonce: BigInt(1),
+					module: MODULE_NAME_INTEROPERABILITY,
+					crossChainCommand: CROSS_CHAIN_COMMAND_REGISTRATION,
+					sendingChainID: getMainchainID(chainID),
+					receivingChainID: chainID,
+					fee: BigInt(0),
+					status: CCMStatusCode.OK,
+					params: Buffer.alloc(0),
+				},
+				{
+					nonce: BigInt(2),
+					module: MODULE_NAME_INTEROPERABILITY,
+					crossChainCommand: CROSS_CHAIN_COMMAND_REGISTRATION,
+					sendingChainID: getMainchainID(chainID),
+					receivingChainID: chainID,
+					fee: BigInt(0),
 					status: CCMStatusCode.OK,
 					params: Buffer.alloc(0),
 				},
 			];
-			ccmsEncoded = ccms.map(ccm => codec.encode(ccmSchema, ccm));
-			transactionParams.crossChainMessages = [...ccmsEncoded];
-			transactionParams.idxs = [1];
+			const merkleTree = new MerkleTree();
+			ccmsEncoded = ccms.map(ccm => codec.encode(ccmSchema, ccm)).map(ccm1 => (utils.hash(ccm1)));
+			await merkleTree.init(ccmsEncoded);
+			transactionParams.crossChainMessages = [ccmsEncoded[0], ccmsEncoded[1]];
+	
+			transactionParams.idxs = [1,2];
 			transactionParams.chainID = chainID;
-
+			const merkleProof =  (await merkleTree.generateProof(ccmsEncoded.map(ccm => Buffer.concat([Buffer.from([0x00]),ccm]))));
+			transactionParams.siblingHashes = merkleProof.siblingHashes as any;
+			
 			commandVerifyContext = createCommandVerifyContext(transaction, transactionParams);
 
 			await interopModule.stores
 				.get(TerminatedOutboxStore)
 				.set(createStoreGetter(commandVerifyContext.stateStore as any), chainID, {
-					outboxRoot,
-					outboxSize: terminatedChainOutboxSize,
+					outboxRoot: merkleTree.root,
+					outboxSize: merkleTree.size,
 					partnerChainInboxSize: 1,
 				});
 

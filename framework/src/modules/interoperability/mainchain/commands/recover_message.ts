@@ -157,6 +157,7 @@ export class RecoverMessageCommand extends BaseInteroperabilityCommand<Mainchain
 			proof,
 			terminatedOutboxAccount.outboxRoot,
 		);
+
 		if (!isVerified) {
 			return {
 				status: VerifyStatus.FAIL,
@@ -190,12 +191,12 @@ export class RecoverMessageCommand extends BaseInteroperabilityCommand<Mainchain
 				// If the sending chain is not the mainchain, forward the CCM.
 				// This function never raises an error.
 				await this._forwardRecovery(ctx);
-
-				// Append the recovered CCM to the list of recovered CCMs.
-				// Notice that the ccm has been mutated in the applyRecovery and forwardRecovery functions
-				// as the status is set to CCM_STATUS_CODE_RECOVERED (so that it cannot be recovered again).
-				recoveredCCMs.push(crossChainMessage);
 			}
+
+			// Append the recovered CCM to the list of recovered CCMs.
+			// Notice that the ccm has been mutated in the applyRecovery and forwardRecovery functions
+			// as the status is set to CCM_STATUS_CODE_RECOVERED (so that it cannot be recovered again).
+			recoveredCCMs.push(crossChainMessage);
 		}
 
 		const terminatedOutboxSubstore = this.stores.get(TerminatedOutboxStore);
@@ -223,9 +224,11 @@ export class RecoverMessageCommand extends BaseInteroperabilityCommand<Mainchain
 	private async _applyRecovery(context: CrossChainMessageContext): Promise<void> {
 		const { logger } = context;
 		const { ccmID } = getEncodedCCMAndID(context.ccm);
+		// Modify the CCM in the context object
+		context.ccm.status = CCMStatusCode.RECOVERED;
+
 		const recoveredCCM: CCMsg = {
 			...context.ccm,
-			status: CCMStatusCode.RECOVERED,
 			sendingChainID: context.ccm.receivingChainID,
 			receivingChainID: context.ccm.sendingChainID,
 		};
@@ -242,6 +245,7 @@ export class RecoverMessageCommand extends BaseInteroperabilityCommand<Mainchain
 						'Execute verifyCrossChainMessage',
 					);
 					await method.verifyCrossChainMessage(context);
+					
 				}
 			}
 		} catch (error) {
@@ -398,6 +402,8 @@ export class RecoverMessageCommand extends BaseInteroperabilityCommand<Mainchain
 		const { logger } = context;
 		const encodedCCM = codec.encode(ccmSchema, context.ccm);
 		const ccmID = utils.hash(encodedCCM);
+		// Modify the CCM in the context object
+		context.ccm.status = CCMStatusCode.RECOVERED;
 		const recoveredCCM: CCMsg = {
 			...context.ccm,
 			status: CCMStatusCode.RECOVERED,

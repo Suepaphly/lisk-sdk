@@ -37,7 +37,7 @@ export interface CCMsg {
 	readonly sendingChainID: Buffer;
 	readonly receivingChainID: Buffer;
 	readonly fee: bigint;
-	readonly status: number;
+	status: number;
 	readonly params: Buffer;
 }
 

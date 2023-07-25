@@ -110,7 +110,7 @@ export class MerkleTree {
 		return this.root;
 	}
 
-	public async generateProof(queryData: ReadonlyArray<Buffer>): Promise<Proof> {
+	public async generateProof(queryData: Buffer): Promise<Proof> {
 		if (this._size === 0) {
 			return {
 				siblingHashes: [],
