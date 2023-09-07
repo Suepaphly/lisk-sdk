@@ -735,6 +735,7 @@ export class ChainConnectorPlugin extends BasePlugin<ChainConnectorPluginConfig>
 			const ccmsAfterLastCertificate = crossChainMessages.filter(
 				ccm =>
 					// Some extra ccms may be stored at the outbox size === finalizedheight.inboxSize
+					// This is because ccms are bundled and the outbox size is the index of the last ccm in the bundle
 					ccm.outboxSize >= (finalizedInfoAtHeight ? finalizedInfoAtHeight.inboxSize : 0),
 			);
 
