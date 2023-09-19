@@ -10,8 +10,8 @@ import {
 } from 'lisk-sdk';
 import { ReactMethod } from '../method';
 import { CROSS_CHAIN_COMMAND_NAME_REACT } from '../constants';
-import { crossChainReactParamsSchema, CCReactMessageParams } from '../schemas'
-import { 	InteroperabilityMethod } from '../types'
+import { crossChainReactParamsSchema, CCReactMessageParams } from '../schemas';
+import { InteroperabilityMethod } from '../types';
 
 interface Params {
 	reactionType: number;
@@ -25,7 +25,7 @@ interface Params {
 
 export class ReactCrossChainCommand extends BaseCommand {
 	private _interoperabilityMethod!: InteroperabilityMethod;
-	private _moduleName!: string;
+	// private _moduleName!: string;
 	// private _method!: ReactMethod;
 	public schema = crossChainReactParamsSchema;
 
@@ -34,7 +34,7 @@ export class ReactCrossChainCommand extends BaseCommand {
 		method: ReactMethod;
 		interoperabilityMethod: InteroperabilityMethod;
 	}) {
-		this._moduleName = args.moduleName;
+		// this._moduleName = args.moduleName;
 		// this._method = args.method;
 		this._interoperabilityMethod = args.interoperabilityMethod;
 	}
@@ -87,7 +87,7 @@ export class ReactCrossChainCommand extends BaseCommand {
 		await this._interoperabilityMethod.send(
 			context.getMethodContext(),
 			senderAddress,
-			this._moduleName,
+			'hello',
 			CROSS_CHAIN_COMMAND_NAME_REACT,
 			params.receivingChainID,
 			params.messageFee,
