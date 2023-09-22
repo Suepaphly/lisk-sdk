@@ -19,6 +19,7 @@
 			"args": [
 				"start",
 				"--api-ipc",
+				"--overwrite-config",
 				"--api-ws",
 				"--api-http",
 				"--enable-dashboard-plugin",

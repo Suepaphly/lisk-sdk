@@ -10,12 +10,16 @@ import {
 } from 'lisk-sdk';
 import { ReactMethod } from '../method';
 import { CROSS_CHAIN_COMMAND_NAME_REACT } from '../constants';
-import { crossChainReactParamsSchema, CCReactMessageParams } from '../schemas';
+import {
+	crossChainReactParamsSchema,
+	CCReactMessageParams,
+	crossChainReactMessageSchema,
+} from '../schemas';
 import { InteroperabilityMethod } from '../types';
 
 interface Params {
 	reactionType: number;
-	helloMessageID: Buffer;
+	helloMessageID: string;
 	amount: bigint;
 	receivingChainID: Buffer;
 	data: string;
@@ -28,6 +32,10 @@ export class ReactCrossChainCommand extends BaseCommand {
 	// private _moduleName!: string;
 	// private _method!: ReactMethod;
 	public schema = crossChainReactParamsSchema;
+
+	public get name(): string {
+		return CROSS_CHAIN_COMMAND_NAME_REACT;
+	}
 
 	public init(args: {
 		moduleName: string;
@@ -45,7 +53,11 @@ export class ReactCrossChainCommand extends BaseCommand {
 
 	// eslint-disable-next-line @typescript-eslint/require-await
 	public async verify(context: CommandVerifyContext<Params>): Promise<VerificationResult> {
-		const { params } = context;
+		const { params, logger } = context;
+
+		logger.info('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+		logger.info(params);
+		logger.info('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 
 		try {
 			if (params.receivingChainID.equals(context.chainID)) {
@@ -79,8 +91,6 @@ export class ReactCrossChainCommand extends BaseCommand {
 		const reactCCM: CCReactMessageParams = {
 			reactionType: params.reactionType,
 			data: params.data,
-			receivingChainID: params.receivingChainID,
-			senderAddress,
 			helloMessageID: params.helloMessageID,
 		};
 
@@ -91,7 +101,7 @@ export class ReactCrossChainCommand extends BaseCommand {
 			CROSS_CHAIN_COMMAND_NAME_REACT,
 			params.receivingChainID,
 			params.messageFee,
-			codec.encode(crossChainReactParamsSchema, reactCCM),
+			codec.encode(crossChainReactMessageSchema, reactCCM),
 			context.header.timestamp,
 		);
 	}
