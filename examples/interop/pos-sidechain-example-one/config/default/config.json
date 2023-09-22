@@ -48,6 +48,9 @@
 			"ccuFee": "500000000",
 			"receivingChainIPCPath": "~/.lisk/mainchain-node-one",
 			"registrationHeight": 10
+		},
+		"dashboard": {
+			"port": 4006
 		}
 	}
 }
