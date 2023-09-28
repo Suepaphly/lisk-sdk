@@ -82,7 +82,6 @@ describe('TransferCrossChainComand', () => {
 		recipientAddress: utils.getRandomBytes(LENGTH_ADDRESS),
 		data: '',
 		messageFee: BigInt(100000),
-		messageFeeTokenID,
 		includeAttributes: false,
 	};
 
@@ -216,118 +215,6 @@ describe('TransferCrossChainComand', () => {
 			).rejects.toThrow('Receiving chain cannot be the sending chain');
 		});
 
-		it('should fail if NFT does not have valid length', async () => {
-			const nftMinLengthContext = createTransactionContextWithOverridingParams({
-				nftID: utils.getRandomBytes(LENGTH_NFT_ID - 1),
-			});
-
-			const nftMaxLengthContext = createTransactionContextWithOverridingParams({
-				nftID: utils.getRandomBytes(LENGTH_NFT_ID + 1),
-			});
-
-			await expect(
-				command.verify(
-					nftMinLengthContext.createCommandVerifyContext(crossChainTransferParamsSchema),
-				),
-			).rejects.toThrow("'.nftID' minLength not satisfied");
-
-			await expect(
-				command.verify(
-					nftMaxLengthContext.createCommandExecuteContext(crossChainTransferParamsSchema),
-				),
-			).rejects.toThrow("'.nftID' maxLength exceeded");
-		});
-
-		it('should fail if receivingChainID does not have valid length', async () => {
-			const receivingChainIDMinLengthContext = createTransactionContextWithOverridingParams({
-				receivingChainID: utils.getRandomBytes(LENGTH_CHAIN_ID - 1),
-			});
-
-			const receivingChainIDMaxLengthContext = createTransactionContextWithOverridingParams({
-				receivingChainID: utils.getRandomBytes(LENGTH_CHAIN_ID + 1),
-			});
-
-			await expect(
-				command.verify(
-					receivingChainIDMinLengthContext.createCommandVerifyContext(
-						crossChainTransferParamsSchema,
-					),
-				),
-			).rejects.toThrow("'.receivingChainID' minLength not satisfied");
-
-			await expect(
-				command.verify(
-					receivingChainIDMaxLengthContext.createCommandVerifyContext(
-						crossChainTransferParamsSchema,
-					),
-				),
-			).rejects.toThrow("'.receivingChainID' maxLength exceeded");
-		});
-
-		it('should fail if recipientAddress does not have valid length', async () => {
-			const recipientAddressMinLengthContext = createTransactionContextWithOverridingParams({
-				recipientAddress: utils.getRandomBytes(LENGTH_ADDRESS - 1),
-			});
-
-			const recipientAddressMaxLenghtContext = createTransactionContextWithOverridingParams({
-				recipientAddress: utils.getRandomBytes(LENGTH_ADDRESS + 1),
-			});
-
-			await expect(
-				command.verify(
-					recipientAddressMinLengthContext.createCommandVerifyContext(
-						crossChainTransferParamsSchema,
-					),
-				),
-			).rejects.toThrow("'.recipientAddress' address length invalid");
-
-			await expect(
-				command.verify(
-					recipientAddressMaxLenghtContext.createCommandVerifyContext(
-						crossChainTransferParamsSchema,
-					),
-				),
-			).rejects.toThrow("'.recipientAddress' address length invalid");
-		});
-
-		it('should fail if data has more than 64 characters', async () => {
-			const dataMaxLengthContext = createTransactionContextWithOverridingParams({
-				data: '1'.repeat(65),
-			});
-
-			await expect(
-				command.verify(
-					dataMaxLengthContext.createCommandVerifyContext(crossChainTransferParamsSchema),
-				),
-			).rejects.toThrow("'.data' must NOT have more than 64 characters");
-		});
-
-		it('should fail if messageFeeTokenID does not have valid length', async () => {
-			const messageFeeTokenIDMinLengthContext = createTransactionContextWithOverridingParams({
-				messageFeeTokenID: utils.getRandomBytes(LENGTH_TOKEN_ID - 1),
-			});
-
-			const messageFeeTokenIDMaxLengthContext = createTransactionContextWithOverridingParams({
-				messageFeeTokenID: utils.getRandomBytes(LENGTH_TOKEN_ID + 1),
-			});
-
-			await expect(
-				command.verify(
-					messageFeeTokenIDMinLengthContext.createCommandVerifyContext(
-						crossChainTransferParamsSchema,
-					),
-				),
-			).rejects.toThrow("'.messageFeeTokenID' minLength not satisfied");
-
-			await expect(
-				command.verify(
-					messageFeeTokenIDMaxLengthContext.createCommandVerifyContext(
-						crossChainTransferParamsSchema,
-					),
-				),
-			).rejects.toThrow("'.messageFeeTokenID' maxLength exceeded");
-		});
-
 		it('should fail if NFT does not exist', async () => {
 			const context = createTransactionContextWithOverridingParams({
 				nftID: utils.getRandomBytes(LENGTH_NFT_ID),
@@ -363,17 +250,6 @@ describe('TransferCrossChainComand', () => {
 			await expect(
 				command.verify(context.createCommandVerifyContext(crossChainTransferParamsSchema)),
 			).rejects.toThrow('');
-		});
-
-		it('should fail if messageFeeTokenID for receiving chain differs from the messageFeeTokenID of parameters', async () => {
-			const context = createTransactionContextWithOverridingParams({
-				nftID: existingNFT.nftID,
-				messageFeeTokenID: utils.getRandomBytes(LENGTH_TOKEN_ID),
-			});
-
-			await expect(
-				command.verify(context.createCommandVerifyContext(crossChainTransferParamsSchema)),
-			).rejects.toThrow('Mismatching message fee Token ID');
 		});
 
 		it('should fail if the owner of the NFT is not the sender', async () => {

@@ -12,6 +12,7 @@
  * Removal or modification of this copyright notice is prohibited.
  */
 
+import { validator } from '@liskhq/lisk-validator';
 import { codec } from '@liskhq/lisk-codec';
 import { BaseMethod } from '../base_method';
 import { FeeMethod, InteroperabilityMethod, ModuleConfig, TokenMethod } from './types';
@@ -23,6 +24,7 @@ import {
 	LENGTH_ADDRESS,
 	LENGTH_CHAIN_ID,
 	LENGTH_COLLECTION_ID,
+	LENGTH_INDEX,
 	LENGTH_NFT_ID,
 	MAX_LENGTH_DATA,
 	NFT_NOT_LOCKED,
@@ -74,7 +76,7 @@ export class NFTMethod extends BaseMethod {
 			throw new Error(`NFT ID must have length ${LENGTH_NFT_ID}`);
 		}
 
-		return nftID.slice(0, LENGTH_CHAIN_ID);
+		return nftID.subarray(0, LENGTH_CHAIN_ID);
 	}
 
 	public async getNFTOwner(methodContext: ImmutableMethodContext, nftID: Buffer): Promise<Buffer> {
@@ -184,16 +186,8 @@ export class NFTMethod extends BaseMethod {
 		});
 	}
 
-	public async getCollectionID(
-		methodContext: ImmutableMethodContext,
-		nftID: Buffer,
-	): Promise<Buffer> {
-		const nftStore = this.stores.get(NFTStore);
-		const nftExists = await nftStore.has(methodContext, nftID);
-		if (!nftExists) {
-			throw new Error('NFT substore entry does not exist');
-		}
-		return nftID.slice(LENGTH_CHAIN_ID, LENGTH_CHAIN_ID + LENGTH_COLLECTION_ID);
+	public getCollectionID(nftID: Buffer): Buffer {
+		return nftID.subarray(LENGTH_CHAIN_ID, LENGTH_CHAIN_ID + LENGTH_COLLECTION_ID);
 	}
 
 	public async isNFTSupported(
@@ -220,7 +214,7 @@ export class NFTMethod extends BaseMethod {
 			if (supportedNFTsStoreData.supportedCollectionIDArray.length === 0) {
 				return true;
 			}
-			const collectionID = await this.getCollectionID(methodContext, nftID);
+			const collectionID = this.getCollectionID(nftID);
 			if (
 				supportedNFTsStoreData.supportedCollectionIDArray.some(id =>
 					collectionID.equals(id.collectionID),
@@ -273,12 +267,11 @@ export class NFTMethod extends BaseMethod {
 		methodContext: MethodContext,
 		collectionID: Buffer,
 	): Promise<bigint> {
-		const indexLength = LENGTH_NFT_ID - LENGTH_CHAIN_ID - LENGTH_COLLECTION_ID;
 		const nftStore = this.stores.get(NFTStore);
 
 		const nftStoreData = await nftStore.iterate(methodContext, {
-			gte: Buffer.concat([this._config.ownChainID, collectionID, Buffer.alloc(indexLength, 0)]),
-			lte: Buffer.concat([this._config.ownChainID, collectionID, Buffer.alloc(indexLength, 255)]),
+			gte: Buffer.concat([this._config.ownChainID, collectionID, Buffer.alloc(LENGTH_INDEX, 0)]),
+			lte: Buffer.concat([this._config.ownChainID, collectionID, Buffer.alloc(LENGTH_INDEX, 255)]),
 		});
 
 		if (nftStoreData.length === 0) {
@@ -286,7 +279,7 @@ export class NFTMethod extends BaseMethod {
 		}
 
 		const latestKey = nftStoreData[nftStoreData.length - 1].key;
-		const indexBytes = latestKey.slice(LENGTH_CHAIN_ID + LENGTH_COLLECTION_ID, LENGTH_NFT_ID);
+		const indexBytes = latestKey.subarray(LENGTH_CHAIN_ID + LENGTH_COLLECTION_ID, LENGTH_NFT_ID);
 		const index = indexBytes.readBigUInt64BE();
 		const largestIndex = BigInt(BigInt(2 ** 64) - BigInt(1));
 
@@ -312,7 +305,7 @@ export class NFTMethod extends BaseMethod {
 		}
 
 		const index = await this.getNextAvailableIndex(methodContext, collectionID);
-		const indexBytes = Buffer.alloc(LENGTH_NFT_ID - LENGTH_CHAIN_ID - LENGTH_COLLECTION_ID);
+		const indexBytes = Buffer.alloc(LENGTH_INDEX);
 		indexBytes.writeBigInt64BE(index);
 
 		const nftID = Buffer.concat([this._config.ownChainID, collectionID, indexBytes]);
@@ -332,11 +325,14 @@ export class NFTMethod extends BaseMethod {
 		this.events.get(CreateEvent).log(methodContext, {
 			address,
 			nftID,
-			collectionID,
 		});
 	}
 
 	public async lock(methodContext: MethodContext, module: string, nftID: Buffer): Promise<void> {
+		if (module === NFT_NOT_LOCKED) {
+			throw new Error('Cannot be locked by NFT module');
+		}
+
 		const nftStore = this.stores.get(NFTStore);
 
 		const nftExists = await nftStore.has(methodContext, nftID);
@@ -715,6 +711,8 @@ export class NFTMethod extends BaseMethod {
 			await supportedNFTsStore.del(methodContext, key);
 		}
 
+		await supportedNFTsStore.del(methodContext, ALL_SUPPORTED_NFTS_KEY);
+
 		this.events.get(AllNFTsSupportRemovedEvent).log(methodContext);
 	}
 
@@ -843,7 +841,7 @@ export class NFTMethod extends BaseMethod {
 		collectionID: Buffer,
 	): Promise<void> {
 		if (chainID.equals(this._config.ownChainID)) {
-			return;
+			throw new Error('Invalid operation. Support for native NFTs cannot be removed');
 		}
 
 		const supportedNFTsStore = this.stores.get(SupportedNFTsStore);
@@ -899,18 +897,19 @@ export class NFTMethod extends BaseMethod {
 	): Promise<void> {
 		const nftStore = this.stores.get(NFTStore);
 		const nftID = storeKey;
-		let isDecodable = true;
+		let isValidInput = true;
 		let decodedValue: NFTStoreData;
 		try {
 			decodedValue = codec.decode<NFTStoreData>(nftStoreSchema, storeValue);
+			validator.validate(nftStoreSchema, decodedValue);
 		} catch (error) {
-			isDecodable = false;
+			isValidInput = false;
 		}
 
 		if (
 			!substorePrefix.equals(nftStore.subStorePrefix) ||
 			storeKey.length !== LENGTH_NFT_ID ||
-			!isDecodable
+			!isValidInput
 		) {
 			this.events.get(RecoverEvent).error(
 				methodContext,
