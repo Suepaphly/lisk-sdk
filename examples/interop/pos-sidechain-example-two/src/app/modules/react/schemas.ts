@@ -24,7 +24,7 @@ export const crossChainReactParamsSchema = {
 		 * ID of the message.
 		 */
 		helloMessageID: {
-			dataType: 'bytes',
+			dataType: 'string',
 			fieldNumber: 2,
 		},
 		/**
