@@ -1,6 +1,4 @@
 /* eslint-disable class-methods-use-this */
-
-import { validator } from '@liskhq/lisk-validator';
 import {
 	BaseInteroperableModule,
 	BlockAfterExecuteContext,
@@ -12,6 +10,7 @@ import {
 	ModuleMetadata,
 	TransactionExecuteContext,
 	TransactionVerifyContext, utils, VerificationResult,
+	validator
 } from 'lisk-sdk';
 import { CreateHelloCommand } from './commands/create_hello_command';
 import { ReactCCCommand } from "./cc_commands/react_command";
@@ -132,5 +131,6 @@ export class HelloModule extends BaseInteroperableModule {
 	public commands = [new CreateHelloCommand(this.stores, this.events)];
 	public reactCCCommand = new ReactCCCommand(this.stores, this.events);
 	public crossChainMethod = new HelloInteroperableMethod(this.stores, this.events);
+	public crossChainCommand = [this.reactCCCommand];
 
 }
