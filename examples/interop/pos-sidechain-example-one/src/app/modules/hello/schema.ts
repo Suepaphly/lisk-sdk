@@ -38,11 +38,7 @@ export const configSchema = {
 			},
 		},
 	},
-	required: [
-		'maxMessageLength',
-		'minMessageLength',
-		'blacklist'
-	],
+	required: ['maxMessageLength', 'minMessageLength', 'blacklist'],
 };
 
 export const getHelloCounterResponseSchema = {
@@ -52,7 +48,7 @@ export const getHelloCounterResponseSchema = {
 	properties: {
 		counter: {
 			type: 'number',
-			format: 'uint32'
+			format: 'uint32',
 		},
 	},
 };
@@ -64,7 +60,7 @@ export const getHelloResponseSchema = {
 	properties: {
 		message: {
 			type: 'string',
-			format: 'utf8'
+			format: 'utf8',
 		},
 	},
 };
@@ -89,14 +85,7 @@ export const crossChainReactParamsSchema = {
 	$id: '/lisk/ccReactParams',
 	type: 'object',
 	/** The required parameters for the command. */
-	required: [
-		'reactionType',
-		'helloMessageID',
-		'receivingChainID',
-		'data',
-		'messageFee',
-		'messageFeeTokenID',
-	],
+	required: ['reactionType', 'helloMessageID', 'data'],
 	/** A list describing the available parameters for the command. */
 	properties: {
 		reactionType: {
@@ -110,33 +99,12 @@ export const crossChainReactParamsSchema = {
 			dataType: 'bytes',
 			fieldNumber: 2,
 		},
-		/**
-		 * The chain ID of the receiving chain.
-		 *
-		 * `maxLength` and `minLength` are equal to 4.
-		 */
-		receivingChainID: {
-			dataType: 'bytes',
-			fieldNumber: 3,
-			minLength: 4,
-			maxLength: 4,
-		},
 		/** Optional field for data / messages. */
-		message: {
+		data: {
 			dataType: 'string',
-			fieldNumber: 4,
+			fieldNumber: 3,
 			minLength: 0,
 			maxLength: 64,
-		},
-		messageFee: {
-			dataType: 'uint64',
-			fieldNumber: 5,
-		},
-		messageFeeTokenID: {
-			dataType: 'bytes',
-			fieldNumber: 6,
-			minLength: 8,
-			maxLength: 8,
 		},
 	},
 };
