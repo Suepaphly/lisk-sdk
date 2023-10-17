@@ -14,7 +14,7 @@ type ModulesMetadata = [
 	const nodeAlias = 'one';
 	const tokenID = Buffer.from('0400000000000000', 'hex');
 	const sidechainID = Buffer.from('04000002', 'hex'); // Update this to send to another sidechain
-	const recipientLSKAddress = 'lskx5uqu2zzybdwrqswd8c6b5v5aj77yytn4k6mv6';
+	const recipientLSKAddress = 'lskzwdjs3ypvo8nzfyxf8x3tbh6tfn7oxfrbghskg';
 	const recipientAddress = address.getAddressFromLisk32Address(recipientLSKAddress);
 
 	const mainchainClient = await apiClient.createIPCClient(`~/.lisk/mainchain-node-one`);
@@ -61,11 +61,13 @@ type ModulesMetadata = [
 		Buffer.from(relayerkeyInfo.privateKey, 'hex'),
 	);
 
+	console.log('piep3');
 	const result = await mainchainClient.invoke<{
 		transactionId: string;
 	}>('txpool_postTransaction', {
 		transaction: tx.getBytes().toString('hex'),
 	});
+	console.log('piep4');
 
 	console.log(
 		`Sent cross chain transfer transaction (amount: ${
