@@ -9,16 +9,21 @@ import {
 	ModuleInitArgs,
 	ModuleMetadata,
 	TransactionExecuteContext,
-	TransactionVerifyContext, utils, VerificationResult,
-	validator
+	TransactionVerifyContext,
+	utils,
+	VerificationResult,
+	validator,
 } from 'lisk-sdk';
 import { CreateHelloCommand } from './commands/create_hello_command';
-import { ReactCCCommand } from "./cc_commands/react_command";
+import { ReactCCCommand } from './cc_commands/react_command';
 import { HelloEndpoint } from './endpoint';
 import { NewHelloEvent } from './events/new_hello';
 import { HelloMethod } from './method';
 import {
-    configSchema, getHelloCounterResponseSchema, getHelloRequestSchema, getHelloResponseSchema
+	configSchema,
+	getHelloCounterResponseSchema,
+	getHelloRequestSchema,
+	getHelloResponseSchema,
 } from './schema';
 import { CounterStore } from './stores/counter';
 import { MessageStore } from './stores/message';
@@ -81,7 +86,7 @@ export class HelloModule extends BaseInteroperableModule {
 		// Overwrite the default module config with values from config.json, if set
 		const config = utils.objects.mergeDeep({}, defaultConfig, moduleConfig) as ModuleConfigJSON;
 		// Validate the provided config with the config schema
-		validator.validate<ModuleConfigJSON>(configSchema, config);
+		validator.validator.validate<ModuleConfigJSON>(configSchema, config);
 		// Call the command init() method with config values as parameters
 		this.commands[0].init(config).catch(err => {
 			// eslint-disable-next-line no-console
@@ -132,5 +137,4 @@ export class HelloModule extends BaseInteroperableModule {
 	public reactCCCommand = new ReactCCCommand(this.stores, this.events);
 	public crossChainMethod = new HelloInteroperableMethod(this.stores, this.events);
 	public crossChainCommand = [this.reactCCCommand];
-
 }
