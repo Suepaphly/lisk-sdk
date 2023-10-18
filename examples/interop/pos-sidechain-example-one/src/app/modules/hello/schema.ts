@@ -116,3 +116,32 @@ export interface CCReactMessageParams {
 	senderAddress: Buffer;
 	message: string;
 }
+
+export const crossChainReactMessageSchema = {
+	/** The unique identifier of the schema. */
+	$id: '/lisk/ccReactMessage',
+	type: 'object',
+	/** The required parameters for the command. */
+	required: ['reactionType', 'helloMessageID', 'data'],
+	/** A list describing the available parameters for the command. */
+	properties: {
+		reactionType: {
+			dataType: 'uint32',
+			fieldNumber: 1,
+		},
+		/**
+		 * ID of the message.
+		 */
+		helloMessageID: {
+			dataType: 'string',
+			fieldNumber: 2,
+		},
+		/** Optional field for data / messages. */
+		data: {
+			dataType: 'string',
+			fieldNumber: 3,
+			minLength: 0,
+			maxLength: 64,
+		},
+	},
+};
