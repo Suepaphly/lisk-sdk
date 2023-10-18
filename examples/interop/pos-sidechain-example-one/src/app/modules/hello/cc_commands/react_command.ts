@@ -22,11 +22,13 @@ export class ReactCCCommand extends BaseCCCommand {
 	}
 
 	public async execute(ctx: CrossChainMessageContext): Promise<void> {
-		const { ccm } = ctx;
+		const { ccm, logger } = ctx;
+		logger.info('Executing React CCM', 'df');
 		// const methodContext = ctx.getMethodContext();
 		// const { sendingChainID, status, receivingChainID } = ccm;
 
 		const params = codec.decode<CCReactMessageParams>(crossChainReactParamsSchema, ccm.params);
+		logger.info({ params }, 'df');
 		const { helloMessageID, reactionType, senderAddress } = params;
 		const reactionSubstore = this.stores.get(ReactionStore);
 
@@ -41,16 +43,21 @@ export class ReactCCCommand extends BaseCCCommand {
 				throw error;
 			}
 
-			ctx.logger.info({ helloMessageID, crossChainCommand: this.name }, error.message);
+			logger.error({ error }, 'Error when getting the reaction substore');
+			logger.info({ helloMessageID, crossChainCommand: this.name }, error.message);
 
 			return;
 		}
 
+		logger.info(msgReactions, 'Contents of the reaction store PRE');
 		if (reactionType === 0) {
 			// TODO: Check if the Likes array already contains the sender address. If yes, remove the address to unlike the post.
 			msgReactions.reactions.like.push(senderAddress);
+		} else {
+			logger.error({ reactionType }, 'invalid reaction type');
 		}
 
+		logger.info(msgReactions, 'Contents of the reaction store POST');
 		await reactionSubstore.set(ctx, helloMessageID, msgReactions);
 	}
 }

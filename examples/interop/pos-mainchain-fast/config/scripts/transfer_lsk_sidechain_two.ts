@@ -61,13 +61,11 @@ type ModulesMetadata = [
 		Buffer.from(relayerkeyInfo.privateKey, 'hex'),
 	);
 
-	console.log('piep3');
 	const result = await mainchainClient.invoke<{
 		transactionId: string;
 	}>('txpool_postTransaction', {
 		transaction: tx.getBytes().toString('hex'),
 	});
-	console.log('piep4');
 
 	console.log(
 		`Sent cross chain transfer transaction (amount: ${
