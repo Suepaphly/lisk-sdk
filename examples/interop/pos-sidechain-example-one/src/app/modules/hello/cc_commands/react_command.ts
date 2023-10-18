@@ -1,7 +1,11 @@
 /* eslint-disable class-methods-use-this */
 
 import { BaseCCCommand, CrossChainMessageContext, codec, cryptography, db } from 'lisk-sdk';
-import { crossChainReactParamsSchema, CCReactMessageParams, crossChainReactMessageSchema } from '../schema';
+import {
+	crossChainReactParamsSchema,
+	CCReactMessageParams,
+	crossChainReactMessageSchema,
+} from '../schema';
 import { MAX_RESERVED_ERROR_STATUS, CROSS_CHAIN_COMMAND_NAME_REACT } from '../constants';
 import { ReactionStore, ReactionStoreData } from '../stores/reaction';
 
@@ -27,19 +31,19 @@ export class ReactCCCommand extends BaseCCCommand {
 		// const methodContext = ctx.getMethodContext();
 		// const { sendingChainID, status, receivingChainID } = ccm;
 		const params = codec.decode<CCReactMessageParams>(crossChainReactMessageSchema, ccm.params);
-		logger.info( params, 'df');
+		logger.info(params, 'df');
 		const { helloMessageID, reactionType, senderAddress } = params;
 		const reactionSubstore = this.stores.get(ReactionStore);
 
-		logger.info({helloMessageID}, 'Contents of helloMessageID');
+		logger.info({ helloMessageID }, 'Contents of helloMessageID');
 		const messageCreatorAddress = cryptography.address.getAddressFromLisk32Address(
 			helloMessageID.toString('utf-8'),
 		);
-		logger.info({messageCreatorAddress}, 'Contents of messageCreatorAddress');
+		logger.info({ messageCreatorAddress }, 'Contents of messageCreatorAddress');
 
 		let msgReactions: ReactionStoreData;
 
-		const reactionsExist = await reactionSubstore.iterate() .has(ctx, messageCreatorAddress);
+		const reactionsExist = await reactionSubstore.has(ctx, messageCreatorAddress);
 
 		if (reactionsExist) {
 			try {
@@ -55,10 +59,13 @@ export class ReactCCCommand extends BaseCCCommand {
 				return;
 			}
 		} else {
-			msgReactions = {reactions: {like: []}};
+			msgReactions = { reactions: { like: [] } };
 		}
 
-		logger.info({ msgReactions }, '+++++++++++++++++++++++++++++=============++++++++++++++++++++++++');
+		logger.info(
+			{ msgReactions },
+			'+++++++++++++++++++++++++++++=============++++++++++++++++++++++++',
+		);
 		logger.info({ msgReactions }, 'Contents of the reaction store PRE');
 		logger.info(msgReactions, 'Contents of the reaction store PRE');
 		if (reactionType === 0) {
