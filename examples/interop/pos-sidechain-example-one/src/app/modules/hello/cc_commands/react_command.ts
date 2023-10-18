@@ -27,11 +27,11 @@ export class ReactCCCommand extends BaseCCCommand {
 
 	public async execute(ctx: CrossChainMessageContext): Promise<void> {
 		const { ccm, logger } = ctx;
-		logger.info('Executing React CCM', 'df');
+		logger.info('Executing React CCM');
 		// const methodContext = ctx.getMethodContext();
 		// const { sendingChainID, status, receivingChainID } = ccm;
 		const params = codec.decode<CCReactMessageParams>(crossChainReactMessageSchema, ccm.params);
-		logger.info(params, 'df');
+		logger.info(params, 'parameters');
 		const { helloMessageID, reactionType, senderAddress } = params;
 		const reactionSubstore = this.stores.get(ReactionStore);
 
