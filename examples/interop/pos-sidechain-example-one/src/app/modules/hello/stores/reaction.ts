@@ -7,7 +7,7 @@ export interface ReactionStoreData {
 }
 
 export const reactionStoreSchema = {
-	$id: '/hello/message',
+	$id: '/hello/reaction',
 	type: 'object',
 	required: ['reactions'],
 	properties: {
@@ -17,6 +17,7 @@ export const reactionStoreSchema = {
 			properties: {
 				like: {
 					type: 'array',
+					fieldNumber: 1,
 					items: {
 						dataType: 'bytes',
 						format: 'lisk32',

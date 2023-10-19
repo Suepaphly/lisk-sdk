@@ -112,9 +112,7 @@ export const crossChainReactParamsSchema = {
 export interface CCReactMessageParams {
 	reactionType: number;
 	helloMessageID: Buffer;
-	receivingChainID: Buffer;
-	senderAddress: Buffer;
-	message: string;
+	data: string;
 }
 
 export const crossChainReactMessageSchema = {
