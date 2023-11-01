@@ -22,6 +22,7 @@ import {
 import {
 	calculateStakeRewards,
 	getModuleConfig,
+	isUsername,
 	shuffleValidatorList,
 } from '../../../../src/modules/pos/utils';
 import * as validatorShufflingScenario from '../../../fixtures/pos_validator_shuffling/uniformly_shuffled_validator_list.json';
@@ -29,6 +30,28 @@ import * as validatorShufflingScenario from '../../../fixtures/pos_validator_shu
 const { q96 } = math;
 
 describe('utils', () => {
+	describe('isUsername', () => {
+		it('should return true for a valid username', () => {
+			expect(isUsername('valid_username$1')).toBeTrue();
+		});
+
+		it('should return false for a username that contains empty character', () => {
+			expect(isUsername('invalid username')).toBeFalse();
+		});
+
+		it('should return false for a username that contains non-supported special character', () => {
+			expect(isUsername('invalid#username')).toBeFalse();
+		});
+
+		it('should return false for a username that contains UPPERCASE characters', () => {
+			expect(isUsername('InvalidUsername')).toBeFalse();
+		});
+
+		it('should return false for a username that contains a null character', () => {
+			expect(isUsername('invalid_username\0')).toBeFalse();
+		});
+	});
+
 	describe('shuffleValidatorList', () => {
 		const { previousRoundSeed1 } = validatorShufflingScenario.testCases.input;
 		const addressList = [...validatorShufflingScenario.testCases.input.validatorList].map(
