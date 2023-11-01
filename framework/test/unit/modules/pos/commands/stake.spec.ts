@@ -20,6 +20,7 @@ import { StakeCommand, VerifyStatus, PoSModule } from '../../../../../src';
 import {
 	BASE_STAKE_AMOUNT,
 	defaultConfig,
+	MAX_NUMBER_PENDING_UNLOCKS,
 	MAX_NUMBER_SENT_STAKES,
 	MODULE_NAME_POS,
 	PoSEventResult,
@@ -805,7 +806,6 @@ describe('StakeCommand', () => {
 				const stakerData = await stakerStore.get(createStoreGetter(stateStore), senderAddress);
 
 				// Assert
-				expect(stakerData.pendingUnlocks).toHaveLength(2);
 				expect(stakerData.pendingUnlocks).toEqual(
 					[
 						{
@@ -1063,7 +1063,6 @@ describe('StakeCommand', () => {
 
 				const stakerData = await stakerStore.get(createStoreGetter(stateStore), senderAddress);
 				// Assert
-				expect(stakerData.pendingUnlocks).toHaveLength(1);
 				expect(stakerData.pendingUnlocks).toEqual([
 					{
 						validatorAddress: validatorAddress2,
@@ -1368,17 +1367,16 @@ describe('StakeCommand', () => {
 				});
 			});
 
-			describe('when transaction.params.stakes has negative amount and makes stakerData.pendingUnlocks more than 20 entries', () => {
+			describe(`when transaction.params.stakes has negative amount and makes stakerData.pendingUnlocks more than ${MAX_NUMBER_PENDING_UNLOCKS} entries`, () => {
 				it('should throw error and emit ValidatorStakedEvent with STAKE_FAILED_TOO_MANY_PENDING_UNLOCKS failure', async () => {
 					// Arrange
-					const initialValidatorAmountForUnlocks = 19;
 					const stakerData = await stakerStore.getOrDefault(
 						createStoreGetter(stateStore),
 						senderAddress,
 					);
 
-					// Suppose account already 19 unlocking
-					for (let i = 0; i < initialValidatorAmountForUnlocks; i += 1) {
+					// Suppose account can have only 1 more pending unlock
+					for (let i = 0; i < MAX_NUMBER_PENDING_UNLOCKS - 1; i += 1) {
 						const uniqueValidatorAddress = Buffer.concat([Buffer.alloc(19), Buffer.alloc(1, i)]);
 
 						const validatorInfo = {
@@ -1541,18 +1539,28 @@ describe('StakeCommand', () => {
 		describe('when transaction.params.stakes contains self-stake', () => {
 			const senderStakeAmountPositive = liskToBeddows(80);
 			const senderStakeAmountNegative = liskToBeddows(20);
-			let totalStake: bigint;
-			let selfStake: bigint;
-			beforeEach(async () => {
-				totalStake = BigInt(20);
-				selfStake = BigInt(20);
+			const totalStake = liskToBeddows(20);
+			const selfStake = liskToBeddows(20);
 
+			beforeEach(async () => {
 				const validatorInfo = {
 					...validatorInfo1,
 					totalStake,
 					selfStake,
 				};
 				await validatorStore.set(createStoreGetter(stateStore), senderAddress, validatorInfo);
+
+				const stakerData = await stakerStore.getOrDefault(
+					createStoreGetter(stateStore),
+					senderAddress,
+				);
+				const stake = {
+					validatorAddress: senderAddress,
+					amount: selfStake,
+					sharingCoefficients: [],
+				};
+				stakerData.stakes.push(stake);
+				await stakerStore.set(createStoreGetter(stateStore), senderAddress, stakerData);
 
 				transactionParamsDecoded = {
 					stakes: [{ validatorAddress: senderAddress, amount: senderStakeAmountPositive }],
@@ -1608,7 +1616,7 @@ describe('StakeCommand', () => {
 				expect(validatorData.selfStake).toEqual(selfStake + senderStakeAmountPositive);
 			});
 
-			it('should change validatorData.selfStake, totalStakeReceived and unlocking with negative stake', async () => {
+			it('should change validatorData.selfStake, totalStakeReceived and pendingUnlocks after decreasing self-stake', async () => {
 				// Act & Assign
 				await stakeCommand.execute(context);
 
@@ -1646,11 +1654,10 @@ describe('StakeCommand', () => {
 				expect(validatorData.selfStake).toEqual(
 					totalStake + senderStakeAmountPositive - senderStakeAmountNegative,
 				);
-				expect(stakerData.stakes).toHaveLength(1);
 				expect(stakerData.stakes).toEqual([
 					{
 						validatorAddress: senderAddress,
-						amount: senderStakeAmountPositive - senderStakeAmountNegative,
+						amount: totalStake + senderStakeAmountPositive - senderStakeAmountNegative,
 						sharingCoefficients: [
 							{
 								tokenID: Buffer.alloc(8),
@@ -1659,7 +1666,6 @@ describe('StakeCommand', () => {
 						],
 					},
 				]);
-				expect(stakerData.pendingUnlocks).toHaveLength(1);
 				expect(stakerData.pendingUnlocks).toEqual([
 					{
 						validatorAddress: senderAddress,
@@ -1755,7 +1761,6 @@ describe('StakeCommand', () => {
 					senderStakeAmountPositive - senderStakeAmountNegative + validatorSelfStake,
 				);
 				expect(validatorData.selfStake).toEqual(validatorSelfStake);
-				expect(stakerData.stakes).toHaveLength(1);
 				expect(stakerData.stakes).toEqual([
 					{
 						validatorAddress,
@@ -1763,7 +1768,6 @@ describe('StakeCommand', () => {
 						sharingCoefficients: [{ tokenID: Buffer.alloc(8), coefficient: Buffer.alloc(24) }],
 					},
 				]);
-				expect(stakerData.pendingUnlocks).toHaveLength(1);
 				expect(stakerData.pendingUnlocks).toEqual([
 					{
 						validatorAddress,
